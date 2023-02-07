@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .block {
+      text-align: center;
+      font-size: 20px;
+      padding: 20px;
+      background-color: lightgray;
+      border-radius: 10px;
+      position: absolute;
+      top: calc(50% - 100px);
+      left: calc(50% - 100px);
+      transition: all 0.5s ease-in-out;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    button {
+      width: 80px;
+      height: 40px;
+      font-size: 18px;
+      margin: 0 10px;
+      background-color: lightgray;
+      border: none;
+      border-radius: 10px;
+      color: white;
+    }
+
+    #yes {
+      background-color: green;
+    }
+
+    #no {
+      background-color: red;
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin-top: 20px;
+    }
+
+    .happy {
+      color: green;
+    }
+
+    .sad {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="block" id="block">
+    <div class="question" id="question">Do you like the color red?</div>
+    <div class="emoji happy" id="emoji">😊</div>
+    <div class="buttons">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+  </div>
+
+  <script>
+    var block = document.getElementById("block");
+    var noButton = document.getElementById("no");
+    var emoji = document.getElementById("emoji");
+    var yesButton = document.getElementById("yes");
+
+    document.addEventListener("mousemove", function(event) {
+      var noButtonRect = noButton.getBoundingClientRect();
+      var yesButtonRect = yesButton.getBoundingClientRect();
+      var x = event.clientX;
+      var y = event.clientY;
+      
+      if (x >= noButtonRect.left && x <= noButtonRect.right && y >= noButtonRect.top && y <= noButtonRect.bottom) {
+        emoji.classList.remove("happy");
+        emoji.classList.add("sad");
+        emoji.innerHTML = "😢";
+      } else if (x >= yesButtonRect.left && x <= yesButtonRect.right && y >= yesButtonRect.top && y <= yesButtonRect.bottom) {
+        emoji.classList.remove("sad");
+        emoji.classList.add("happy");
+        emoji.innerHTML = "😊";
+      }
+    });
+
+       noButton.addEventListener("mouseover", function() {
+      block.style.top = Math.floor(Math.random() * (window.innerHeight - block.offsetHeight)) + "px";
+      block.style.left = Math.floor(Math.random() * (window.innerWidth - block.offsetWidth)) + "px";
+    });
+  </script>
+</body>
+</html>
